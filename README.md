@@ -1,0 +1,2 @@
+hello jenkins
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf

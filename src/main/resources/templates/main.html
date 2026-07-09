@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Movies</title>
+    <!-- Added Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+ body{
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #3a7bd5);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 3px #000, 0 0 10px rgba(255, 215, 0, 0.5);
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, #ffd700, #ffed4e);
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+thead {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+th {
+    font-weight: bold;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+td img {
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+td img:hover {
+    transform: scale(1.1);
+}
+
+/* Button styles */
+.btn {
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-add {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-add:hover {
+    background: linear-gradient(45deg, #218838, #17a2b8);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
+}
+
+.btn-delete {
+    background: linear-gradient(45deg, #dc3545, #fd7e14);
+    color: white;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-delete:hover {
+    background: linear-gradient(45deg, #c82333, #e8680f);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+}
+
+/* Add Movie link */
+h1 a {
+    font-size: 1.2em;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+}
+
+/* Additional enhancements */
+.btn::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+
+.btn-add::before {
+    content: '\f067'; /* Plus icon */
+}
+
+.btn-delete::before {
+    content: '\f1f8'; /* Trash icon */
+}
+
+.btn-add[href="/add"]::before {
+    content: '\f055'; /* Plus circle icon for Add Movie */
+}
+
+/* Subtle background animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
+    animation: backgroundShift 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-10px) translateY(-10px); }
+    50% { transform: translateX(10px) translateY(10px); }
+    75% { transform: translateX(-5px) translateY(5px); }
+}
+
+</style>
+
+
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Managment</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Genre</th>
+                    <th>Rating</th>
+                    <th>Actor</th>
+                    <th>Actions</th>
+                  
+                </tr>
+                </thead>
+            <tr th:each="movie:${movies}">
+            <td th:text="${movie.name}"></td>
+            <td><img height="100px" width="100px" alt="image not found"
+            th:src="${movie.imageLink}"></td>
+            <td th:text="${movie.genre}"></td>
+            <td th:text="${movie.actor}"></td>
+            <td th:text="${movie.rating}"></td>					
+            <td><a th:href="'/edit/'+${movie.id}" class="btn btn-add">Edit</a>
+                <a class="btn btn-delete" th:href="'/delete/'+${movie.id}">Delete</a></td>
+            </tr>
+                    </table>
+                   
+                    <br><br>
+<h1 align="left"><a href="/add" class="btn btn-add">Add Movie</a></h1>
+  <script th:if="${message}">
+    
+    alert("[[${message}]]");
+    </script>
+        
+    </div>
+    
+  
+</body>
+</html>
