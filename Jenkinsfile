@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "🚀 Building and starting Spring Boot & MySQL containers..."
                 sh '''
-                   docker-compose up -d --build
+                   docker compose up -d --build
                 '''
             }
         }
